@@ -11,19 +11,18 @@ class Entrega():
         self.complemento = complemento
 
 def send_request(entrega):
-    url_tst = "https://docs.google.com/forms/d/e/1FAIpQLSfc5gkEAHvXB9zSZYHUewj466yhpE2_hf7r1JzJYu088VgIzA/formResponse"
-    url_def = "https://docs.google.com/forms/d/e/1FAIpQLSeGkKoum1HEonSxWeZP8r2PDHBncBVxRn61O4x4SwgTILDWtQ/formResponse"
+    url = "https://docs.google.com/forms/d/e/1FAIpQLSeGkKoum1HEonSxWeZP8r2PDHBncBVxRn61O4x4SwgTILDWtQ/formResponse"
 
     data = {
-        "entry.11703947"   : "Monica Maria Wanderley Padilha",
-        "entry.283002341"  : entrega.itemEntrega,
-        "entry.96278573"   : entrega.cep,
-        "entry.1587431302" : entrega.endereco,
-        "entry.1495180370" : entrega.complemento
+        "entry.796078177"  : "Monica Maria Wanderley Padilha",
+        "entry.1739664412" : entrega.itemEntrega,
+        "entry.1391419047" : entrega.cep,
+        "entry.377666364"  : entrega.endereco,
+        "entry.2057892184" : entrega.complemento
     }
 
     print(data)
-    result = requests.post(url_tst, data)
+    result = requests.post(url, data)
 
     print(result)
 
