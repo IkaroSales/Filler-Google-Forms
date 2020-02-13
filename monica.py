@@ -10,10 +10,9 @@ class Entrega():
         self.cep = cep
         self.complemento = complemento
 
-def send_response(entrega):
-    url = "https://docs.google.com/forms/d/e/1FAIpQLSfZ0-8mzregRLTmn6xo7q05Camz95F4fkWomU5q8OBSnHWg0g/formResponse"
-    url_test = "https://docs.google.com/forms/d/e/1FAIpQLSfc5gkEAHvXB9zSZYHUewj466yhpE2_hf7r1JzJYu088VgIzA/formResponse"
-    url_monica = "https://docs.google.com/forms/d/e/1FAIpQLSeGkKoum1HEonSxWeZP8r2PDHBncBVxRn61O4x4SwgTILDWtQ/formResponse"
+def send_request(entrega):
+    url_tst = "https://docs.google.com/forms/d/e/1FAIpQLSfc5gkEAHvXB9zSZYHUewj466yhpE2_hf7r1JzJYu088VgIzA/formResponse"
+    url_def = "https://docs.google.com/forms/d/e/1FAIpQLSeGkKoum1HEonSxWeZP8r2PDHBncBVxRn61O4x4SwgTILDWtQ/formResponse"
 
     data = {
         "entry.11703947"   : "Monica Maria Wanderley Padilha",
@@ -24,7 +23,7 @@ def send_response(entrega):
     }
 
     print(data)
-    result = requests.post(url_test, data)
+    result = requests.post(url_tst, data)
 
     print(result)
 
@@ -34,8 +33,14 @@ def excel_file():
 
     data = pd.read_excel("automacao.xlsx", "Planilha1")
 
-    # for name, sheet in data.items():
-    entrega = Entrega("Brasil", "Produto A", "Rua Estrela do Mar, 553", "51010-050", "A")
-    send_response(entrega)
+    for i in range(data.shape[0]):
+        itemEntrega = data.iloc[i]["Item de entrega"]
+        produto     = data.iloc[i]["Produto"]
+        cep         = data.iloc[i]["CEP"]
+        endereco    = data.iloc[i]["Endereço"]
+        complemento = data.iloc[i]["Complemento"]
+
+        entrega = Entrega(itemEntrega, produto, endereco, cep, complemento)
+        send_request(entrega)
 
 excel_file()
