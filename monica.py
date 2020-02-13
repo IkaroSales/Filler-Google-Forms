@@ -22,9 +22,8 @@ def excel_file():
     data = pd.read_excel("automacao.xlsx", "Planilha1")
 
     for name, sheet in data.items():
-        produto = Entrega()
-        produto.setEntrega("aoi")
-        produto.entrega
+        entrega = Entrega()
+        entrega.setEntrega("aoi")
 
         print(sheet)
 
